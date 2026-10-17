@@ -126,3 +126,45 @@ directly to a wrong statement about when the field took off.
 the legacy code holds substantial mass in years where `G06N10` is thin, it belongs
 in the definition for the historical period. The code list in `config/sector.yaml`
 already carries it under `legacy`, unused.
+
+## 8. Open: the shape of the volume curve
+
+The Step 1 volume series has an unexpected shape. At family level it rises from
+about 1,065 families in 2000 to roughly 1,750 in 2004, falls to about 380 by
+2013–2014, and then climbs to 3,974 by 2022. That is a fall of close to 80% from
+the 2004 peak to the 2014 trough.
+
+**We do not believe that is a real feature of quantum computing.** The field did
+not contract by four fifths between 2004 and 2014; by every other account,
+research activity and investment rose steadily across that period. A curve that
+contradicts the qualitative record that sharply is usually telling us something
+about the dataset rather than about the technology.
+
+The most likely explanation is composition. Our definition is a union of code
+blocks with different histories:
+
+- **`B82Y10/00`** — nanotechnology for information processing. The `B82Y` scheme
+  was introduced well after the filings it covers and applied retroactively, so
+  it tags the early-2000s nanotechnology wave. That wave peaked around 2003–2005
+  and decayed, which is the shape of our early hump.
+- **`H10N60/12`** — Josephson devices. Superconducting electronics has a filing
+  history of its own, much of it unrelated to qubits.
+- **`H04L9/0852`**, **`H04B10/70`** — quantum communication, on its own
+  trajectory and heavily concentrated geographically.
+- **`G06N10`** — quantum computing proper, which we would expect to rise
+  monotonically from the mid-2010s.
+
+If this is right, the series is not one phenomenon but at least two superimposed:
+a decaying nanotechnology wave and a rising quantum computing one. Every growth
+figure computed from a 2000 base would then be measuring the sum of the two, and
+the apparent decline-then-recovery would be an artefact of our own code list.
+
+**The diagnostic is cheap and decisive**: compute the volume series separately
+for each code block and plot them together. If the early hump belongs to
+`B82Y10/00` and `G06N10` rises monotonically, the question answers itself.
+
+Until that is run, treat the 2000-base growth figures as provisional. The
+2010-base figures are less exposed but not immune. Note the direction of the
+likely bias: a contaminated base year is an *inflated* base, so true quantum
+computing growth is probably **higher** than the numbers currently reported, not
+lower.
