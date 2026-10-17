@@ -1,9 +1,15 @@
 # Bulk PATSTAT data is never committed — the queries that produce it are.
 *.parquet
-outputs/*.pkl
-outputs/**/*.pkl
 data/
 *.csv.gz
+
+# Cached aggregates are the exception. outputs/cache/ holds the small result
+# tables behind the figures — a few kilobytes each, and each one standing in for
+# a PROD query that takes minutes. Committing them lets a teammate re-run the
+# analysis without paying for the queries again. They are derived data, so they
+# are regenerable: delete one and the notebook recomputes it.
+*.pkl
+!outputs/cache/*.pkl
 
 # Jupyter
 .ipynb_checkpoints/
