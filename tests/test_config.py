@@ -56,6 +56,18 @@ def test_legacy_codes_are_not_in_the_active_definition(cfg):
     assert not set(cfg.cpc_legacy) & set(cfg.cpc_prefixes)
 
 
+def test_excluded_codes_are_not_in_the_active_definition(cfg):
+    """B82Y10/00 was removed on evidence; it must not creep back in.
+
+    Counted on its own it held 96% of the year-2000 families, fell 89% from its
+    2004 peak to its 2014 trough and compounded at zero across the window — all
+    of the distortion in the volume curve and none of the trend. The code stays
+    recorded under `excluded` so the decision is visible rather than invisible.
+    """
+    assert "B82Y10/00" in cfg.cpc_excluded
+    assert not set(cfg.cpc_excluded) & set(cfg.cpc_prefixes)
+
+
 def test_communication_codes_are_separable(cfg):
     """The scope boundary must be testable without editing the pipeline."""
     assert set(cfg.cpc_communication) <= set(cfg.cpc_prefixes)

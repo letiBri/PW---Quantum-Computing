@@ -36,21 +36,24 @@ cpc:
   # Enabling hardware. Lower precision than the core: these classes also cover
   # subject matter outside quantum computing, so families entering only through
   # them are the ones most in need of validation.
-  #
-  # UNDER REVIEW — B82Y10/00. The block decomposition (docs/methodology.md §8,
-  # outputs/tables/tab_blocks.csv) shows this code is dominated by the
-  # early-2000s nanotechnology wave rather than by quantum computing: 96% of our
-  # year-2000 families, a fall of 89% from its 2004 peak to its 2014 trough, and
-  # a compound growth rate of zero across the whole window. It contributes the
-  # distortion in the volume curve and none of the trend.
-  #
-  # It should be dropped from the headline definition, or admitted only in
-  # combination with a quantum keyword. The change is deliberately NOT applied
-  # here: this file still describes the definition that produced the committed
-  # outputs, and config and results should move together.
   hardware:
-    - "B82Y10/00"   # Nanotechnology for information processing — see note above
     - "H10N60/12"   # Josephson-effect devices (basis of superconducting qubits)
+
+  # Deliberately excluded, with the evidence. These codes were in the definition
+  # until 17 October and were removed after the block decomposition
+  # (docs/methodology.md §8, outputs/tables/tab_blocks.csv) showed what they were
+  # actually measuring. Recorded rather than deleted so the choice stays visible.
+  excluded:
+    # B82Y10/00 — Nanotechnology for information processing, storage or
+    # transmission, "e.g. quantum computing". The title invites inclusion; the
+    # data does not support it. Counted on its own the code holds 96% of our
+    # year-2000 families, falls 89% from its 2004 peak to its 2014 trough, and
+    # compounds at zero across the whole window: 1,039 families in 2000 and
+    # 1,034 in 2022. It contributed the entire decline-and-recovery shape of the
+    # volume curve and none of the trend, and at 21,975 families it was 44% of
+    # the sector. Genuine quantum-nanotechnology families still enter through
+    # the keyword branch, which is why removing it costs coverage but not signal.
+    - "B82Y10/00"
 
   # Quantum communication. Included in the current dataset; this is a scope
   # decision, not a precision question — these families are correctly classified,

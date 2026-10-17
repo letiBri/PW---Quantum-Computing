@@ -187,19 +187,51 @@ understated growth rate; it is a ratio between two different things. The headlin
 figures in the README are therefore stated on `G06N10`, with the union reported
 separately and its composition named.
 
-### Recommended change to the definition, not yet applied
+### Applied: `B82Y10/00` removed, and what changed
 
-`B82Y10/00` should come out of the headline definition. It adds no trend, it
-dominates and distorts the early base, and the client's question is about quantum
-computing. Three options, in the order we would defend them:
+`B82Y10/00` was removed from the definition on 17 October and the pipeline
+re-run from scratch with the caches cleared. Genuine quantum-nanotechnology
+families still enter through the keyword branch — anything really about qubit
+fabrication says *qubit* or *quantum comput* in its abstract — so the change
+costs coverage of the nanotechnology wave without costing signal.
 
-1. **Drop it**, and report quantum computing on `G06N10` plus the keyword branch.
-2. **Keep it, intersected with a keyword** — a nanotechnology family enters only
-   if it also mentions qubits or quantum computation. This recovers the genuine
-   quantum-hardware overlap, which is real after 2015, without the 2000s wave.
-3. **Keep it as its own segment**, never merged into a headline number.
+| | Before | After |
+|---|---:|---:|
+| CPC branch | 46,932 | 20,024 |
+| Keyword branch | 11,599 | 11,599 |
+| Keyword-only | 3,307 (6.6%) | 3,468 (14.8%) |
+| **Union** | **50,239** | **23,492** |
+| Sector families, 2000 | 1,065 | 50 |
+| Sector families, 2022 | 3,974 | 3,100 |
+| CAGR 2000-2022 | 6.17% | **20.63%** |
+| CAGR 2010-2022 | 11.94% | **32.28%** |
+| Applications per family, 2022 | 2.30 | 1.89 |
 
-Option 2 is the better analysis and is what we would adopt. It is **not yet
-applied**: `config/sector.yaml` still carries the definition that produced the
-committed outputs, because changing the definition means re-running the pipeline
-and every figure with it. Config and results should move together or not at all.
+The dataset halves and the growth rate triples, which is what it looks like when
+a flat, non-growing population is removed from a growing one. Against all
+patenting (4.46% and 6.24%) the sector now runs at 4.6 and 5.2 times the rate.
+
+Two consequences worth carrying forward.
+
+**The keyword branch now matters much more.** Keyword-only families rise from
+6.6% to 14.8% of the dataset, because families that previously had CPC
+confirmation through `B82Y10/00` no longer do. The branch with no independent
+classification support now carries roughly one family in seven, which raises the
+stakes on the validation sample in `docs/validation.md`.
+
+**Composition reached further than the volume curve.** Applications per family
+fell from 2.30 to 1.89 once the nanotechnology families were removed, so the
+"quantum inventions are protected unusually widely" finding was partly their
+doing. The remaining 29% premium over the 1.47 of patenting generally is the
+honest figure. Any indicator built on the old family set inherits the same
+problem, which is the argument for fixing the definition before Step 3 rather
+than after it.
+
+### What was not done
+
+`B82Y10/00` could instead have been kept and intersected with a keyword, which
+would recover the genuine quantum-hardware overlap that is real after 2015. We
+chose the simpler rule because the keyword branch already provides that path and
+a definition that can be stated in one sentence is easier to defend than one that
+cannot. If the validation sample shows the keyword branch is weak, this is the
+first thing to revisit.

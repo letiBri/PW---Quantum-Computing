@@ -40,6 +40,7 @@ class SectorConfig:
     cpc_hardware: tuple[str, ...]
     cpc_communication: tuple[str, ...]
     cpc_legacy: tuple[str, ...]
+    cpc_excluded: tuple[str, ...]
     keywords: tuple[str, ...]
 
     year_min: int
@@ -59,9 +60,10 @@ class SectorConfig:
     def cpc_prefixes(self) -> tuple[str, ...]:
         """The CPC codes actually used to select the sector.
 
-        Legacy codes are excluded: they belong to the pre-2019 scheme and are
-        included only if the backfile turns out to be incompletely reclassified.
-        See docs/methodology.md, section 7.
+        Legacy codes are left out: they belong to the pre-2019 scheme, and the
+        diagnostic in docs/methodology.md section 7 found that group empty.
+        Excluded codes are left out by decision, with the evidence recorded in
+        sector.yaml and in docs/methodology.md section 8.
         """
         return self.cpc_core + self.cpc_hardware + self.cpc_communication
 
@@ -93,6 +95,7 @@ def load_config(path: Path | str = DEFAULT_CONFIG_PATH) -> SectorConfig:
         cpc_hardware=tuple(cpc["hardware"]),
         cpc_communication=tuple(cpc["communication"]),
         cpc_legacy=tuple(cpc.get("legacy", ())),
+        cpc_excluded=tuple(cpc.get("excluded", ())),
         keywords=tuple(raw["keywords"]),
         year_min=int(time["year_min"]),
         year_max=int(time["year_max"]),
@@ -119,4 +122,5 @@ if __name__ == "__main__":
     print(f"CPC hardware     ({len(cfg.cpc_hardware)}): {', '.join(cfg.cpc_hardware)}")
     print(f"CPC communication({len(cfg.cpc_communication)}): {', '.join(cfg.cpc_communication)}")
     print(f"CPC legacy       ({len(cfg.cpc_legacy)}, unused): {', '.join(cfg.cpc_legacy)}")
+    print(f"CPC excluded     ({len(cfg.cpc_excluded)}, by decision): {', '.join(cfg.cpc_excluded)}")
     print(f"Keywords         ({len(cfg.keywords)})")

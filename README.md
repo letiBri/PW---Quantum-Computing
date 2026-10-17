@@ -69,8 +69,17 @@ CPC codes were chosen by reading the official scheme definitions rather than the
 class titles. The core is `G06N10`, titled *"Quantum computing, i.e. information
 processing based on quantum-mechanical phenomena"*, together with its five
 subgroups — models, physical realisations, algorithms, error correction and
-programming. To these we add two enabling-hardware classes, `B82Y10/00` and
-`H10N60/12`, and two quantum-communication classes, `H04B10/70` and `H04L9/0852`.
+programming. To these we add one enabling-hardware class, `H10N60/12`
+(Josephson-effect devices), and two quantum-communication classes, `H04B10/70`
+and `H04L9/0852`.
+
+One code was removed on evidence. `B82Y10/00` — *nanotechnology for information
+processing, storage or transmission, e.g. quantum computing* — reads like an
+obvious inclusion and was in our first definition. Counted on its own it turned
+out to be measuring the early-2000s nanotechnology wave: 44% of the dataset, 96%
+of the year-2000 families, and a compound growth rate of exactly zero across the
+window. `docs/methodology.md` §8 sets out the evidence; `config/sector.yaml`
+records the exclusion.
 
 Keywords are deliberately multi-word or technically specific. The bare term
 *quantum* is useless for this sector: quantum dot, quantum well and quantum
@@ -85,18 +94,22 @@ Run on PROD over 2000–2022, at family level:
 
 | Branch | Families | Share of union |
 |---|---:|---:|
-| CPC | 46,932 | 93.4% |
-| Keywords | 11,599 | 23.1% |
-| — also found by CPC | 8,292 | |
-| — **keyword-only** | 3,307 | 6.6% |
-| **Union (the sector)** | **50,239** | 100% |
+| CPC | 20,024 | 85.2% |
+| Keywords | 11,599 | 49.4% |
+| — also found by CPC | 8,131 | 34.6% |
+| — **keyword-only** | 3,468 | 14.8% |
+| **Union (the sector)** | **23,492** | 100% |
 
-Two things follow. First, **71.5% of keyword hits are independently confirmed by
-a classification code**, which is the signature of a keyword list that is not
+Two things follow. First, **70% of keyword hits are independently confirmed by a
+classification code**, which is the signature of a keyword list that is not
 over-reaching — a runaway list would produce a large branch mostly disjoint from
-CPC. Second, **3,307 families are visible only in text**. Quantum computing is
-well institutionalised in the CPC scheme, but roughly one family in fifteen still
-escapes it, and those are the families a classification-only study would miss.
+CPC. Second, **3,468 families are visible only in text**: roughly one in seven.
+Those are the families a classification-only study would miss, and they are also
+the part of the definition most in need of validation.
+
+Removing `B82Y10/00` cut the dataset from 50,239 families to 23,492, a little
+over half. That is the measure of how much of the original "sector" was a
+different technology.
 
 ---
 
@@ -133,51 +146,53 @@ therefore sums to the number of families rather than inflating it.
 
 ## What we have found so far
 
-A first pass on the whole dataset produced a curve that did not make sense: the
+A first pass over the whole dataset produced a curve that did not make sense: the
 sector appeared to peak around 2004, lose nearly 80% of its volume by 2014, and
 only then recover. Quantum computing did not contract by four fifths over that
-decade, so we decomposed the series by block of the definition. The result
-changed the finding, and it is set out in full in `docs/methodology.md` §8.
+decade, so we counted each block of the definition separately. That changed both
+the definition and the finding; `docs/methodology.md` §8 carries the argument.
 
-**The apparent decline belonged to a different technology.** `B82Y10/00`,
-nanotechnology for information processing, accounts for 96% of our year-2000
-families and falls 89% from its 2004 peak to its 2014 trough — the early-2000s
-nanotechnology wave, tagged retroactively by a classification scheme introduced
-long after the filings it covers. Over the full window that block is flat: 1,039
-families in 2000, 1,034 in 2022, a compound rate of zero. It contributed the
-entire distortion and none of the trend.
+**The apparent decline belonged to a different technology.** `B82Y10/00` held 96%
+of our year-2000 families and fell 89% from its 2004 peak to its 2014 trough —
+the early-2000s nanotechnology wave, tagged retroactively by a classification
+scheme introduced long after the filings it covers. Across the full window that
+block is flat: 1,039 families in 2000, 1,034 in 2022, compounding at zero. It
+supplied the entire distortion and none of the trend. It is now excluded, which
+cut the dataset from 50,239 families to 23,492.
 
-**Quantum computing itself never declined.** Counted on `G06N10` alone:
+**On the corrected definition, the sector never declined.**
 
-| | 2000 | 2010 | 2022 | CAGR 2000–2022 |
+| | 2000 | 2022 | Growth | CAGR 2000–2022 |
 |---|---:|---:|---:|---:|
-| Quantum computing (`G06N10`) | 15 | 19 | 1,915 | **24.7%** |
-| All patenting | 914,442 | — | 2,389,730 | 4.46% |
+| Quantum computing (families) | 50 | 3,100 | ×62 | **20.6%** |
+| All patenting (families) | 914,442 | 2,389,730 | ×2.6 | 4.46% |
 
-A **128-fold increase**, compounding at **24.7% a year against 4.46% for
-patenting as a whole — 5.5 times the rate**, rising to 7.5 times over 2010–2022.
-The series is flat and small through the 2000s, turns up around 2013 and rises
-monotonically thereafter.
+The sector compounds at **20.6% a year against 4.46% for patenting as a whole —
+4.6 times the rate** — and over 2010–2022 at 32.3% against 6.24%, **5.2 times**.
+The series is small and flat through the 2000s, turns up around 2013 and rises
+monotonically thereafter. Counted on `G06N10` alone the core runs from 15
+families in 2000 to 1,915 in 2022, a 128-fold increase at 24.7% a year.
 
 **The early years are real, not missing.** Quantum computing sat under
 `G06N99/002` before `G06N10` existed, so sparse early counts could have been a
 reclassification artefact rather than a fact about the field. Querying the legacy
 group returns nothing at all: the backfile was reclassified and the old group
-emptied. The 2013–2015 inflection can therefore be stated as an observation
-rather than hedged.
+emptied behind it. The 2013–2015 inflection is therefore an observation, not a
+hedge.
 
-**Quantum communication is not a rounding error.** `H04L9/0852` and `H04B10/70`
-together reach 894 families in 2022 against 1,915 for `G06N10`, growing at 20.8%
-a year. Roughly a third of recent activity in our dataset is a different market
-with a different geography, which is why the scope boundary has to be stated
-rather than assumed.
+**Quantum communication is a third of the field as we have drawn it.**
+`H04L9/0852` and `H04B10/70` together reach 894 families with a 2022 priority
+against 1,915 for `G06N10`, growing at 20.8% a year. A different market with a
+different geography, and too large to merge silently into a headline figure —
+which is why the scope boundary is stated rather than assumed.
 
-**On the union, inventions are protected unusually widely.** Dividing
-applications by families gives 2.30 jurisdictions per invention in 2022 against
-1.47 for patents generally, about 56% more. This is computed on the full union
-and so inherits its composition; it should be recomputed on the core before it is
-quoted as a fact about quantum computing. If it survives, it is a sector-level
-analogue of the Globalization indicator used in Step 3.
+**Inventions are protected somewhat more widely than average.** Dividing
+applications by families gives 1.89 jurisdictions per invention in 2022 against
+1.47 for patents generally, about 29% more. This figure was 2.30 on the
+pre-correction dataset, so the nanotechnology families were inflating it — a
+useful reminder that composition reaches further than the volume curve. The
+remaining 29% premium is the honest number, and it prefigures the Globalization
+indicator used in Step 3.
 
 ## Status
 
@@ -191,30 +206,24 @@ analogue of the Globalization indicator used in Step 3.
 | 5 | Magic Quadrant | Not started |
 | 6 | Strategic analysis and recommendation | Not started |
 
-Three items are known gaps rather than work merely not yet reached.
+Two items are known gaps rather than work merely not yet reached.
 
 **The query is not yet validated.** Reading the CPC scheme to choose codes is
 construction, not validation: it justifies the codes but produces no evidence
-about what the resulting set actually contains. The protocol is set out in
+about what the resulting set actually contains. The protocol is in
 `docs/validation.md` — a stratified hand-labelled sample, drawn from the branches
-that can actually be wrong rather than uniformly from the union.
-
-**The definition still contains `B82Y10/00`.** The block decomposition shows it
-contributes no trend and distorts the early base badly enough to invert the
-sector's apparent direction. It should come out of the headline definition, or
-enter only in combination with a quantum keyword. The change is **not applied**:
-`config/sector.yaml` still holds the definition that produced the committed
-outputs, because changing it means re-running the pipeline and every figure with
-it, and a config that disagrees with the results it supposedly generated is worse
-than one that is merely improvable. `docs/methodology.md` §8 sets out the options.
+that can actually be wrong rather than uniformly from the union. This matters
+more after the correction than before it: the keyword-only stratum is now 14.8%
+of the dataset rather than 6.6%, so the branch carrying no independent
+confirmation now holds roughly one family in seven.
 
 **The scope boundary needs settling.** Including `H04B10/70` and `H04L9/0852`
 makes this a quantum *technologies* study rather than a quantum *computing* one.
 We now know the size of the question: 894 families with a 2022 priority against
 1,915 for `G06N10`, growing at 20.8% a year. That is roughly a third of recent
-activity, which is too large to merge silently into a headline figure. Either
-keep it and report it as its own segment, or cut it — both are defensible, and
-leaving it unstated is not.
+activity, too large to merge silently into a headline figure. Either keep it and
+report it as its own segment, or cut it — both are defensible, and leaving it
+unstated is not.
 
 ---
 

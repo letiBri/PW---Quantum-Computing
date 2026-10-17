@@ -33,8 +33,14 @@ actually fail.
 | Stratum | Population | Sample | What it tests |
 |---|---:|---:|---|
 | A — core CPC (`G06N10` only) | | 20 | sanity check; expected near-perfect |
-| B — peripheral hardware only (`B82Y10/00`, `H10N60/12`, no core code) | | 40 | precision of the enabling-hardware classes |
-| C — keyword-only (no CPC match at all) | 3,307 | 40 | precision of the free-text branch |
+| B — peripheral hardware only (`H10N60/12`, no core code) | | 20 | precision of the enabling-hardware class |
+| C — keyword-only (no CPC match at all) | 3,468 | 60 | precision of the free-text branch |
+
+Stratum C is weighted most heavily because it is where the uncertainty now sits.
+After `B82Y10/00` was removed from the definition (`docs/methodology.md` §8),
+keyword-only families rose from 6.6% to 14.8% of the dataset: roughly one family
+in seven now rests on free-text matching with no classification support. The
+branch that most needs measuring is also the one that grew.
 
 Families reachable only through the quantum-communication codes
 (`H04B10/70`, `H04L9/0852`) are a **scope** question rather than a precision
@@ -83,6 +89,9 @@ they include that we do not, together with the reason for excluding it.
 | B — peripheral hardware | | | |
 | C — keyword-only | | | |
 | **Weighted total** | | | |
+
+Sector size at the time of labelling: 23,492 families (CPC 20,024, keywords
+11,599, keyword-only 3,468).
 
 Inter-rater disagreement rate:
 
