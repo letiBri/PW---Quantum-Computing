@@ -106,65 +106,100 @@ The decision is defensible either way, but it has to be made explicitly:
   sector is named in the brief and what Dell, as a computing-infrastructure
   company, would be buying.
 
-The CPC subclass mix in Step 1 quantifies how much of the 50,239 families these
-classes account for. That number decides the argument. Until then, every growth
-and geography figure carries this caveat.
+The block decomposition in section 8 gives the first measurement. Quantum
+communication is not marginal: 894 families with a 2022 priority year against
+1,915 for `G06N10`, and it grows at 20.8% a year over the full window. It is
+roughly a third of recent activity in our dataset, and it is a different market
+with a different geography.
 
-## 7. Open: the pre-2019 classification scheme
+That size makes the silent-merge option untenable. Whichever way the boundary is
+drawn, the communication codes have to be named and their contribution reported;
+they cannot be folded into a single headline number without misleading the
+reader. Until the team settles it, every growth and geography figure computed on
+the union carries this caveat.
+
+## 7. Resolved: there is no gap from the pre-2019 classification scheme
 
 Quantum computing was classified under `G06N99/002` before `G06N10` was created.
 CPC reclassification is in principle retroactive across the backfile, but
-reclassification campaigns are never perfectly complete.
+reclassification campaigns are never perfectly complete. Had ours been
+incomplete, the volume series would show a spurious jump around the time
+`G06N10` came into use, and we would have drawn a wrong conclusion about when
+the field took off.
 
-If pre-2019 families were not fully reclassified, our volume series will show a
-spurious jump around the time `G06N10` came into use — an artefact of the
-classification scheme rather than of the technology, and one that would lead
-directly to a wrong statement about when the field took off.
+**We tested it, and there is no gap.** Counting families carrying `G06N99/002`
+by priority year over 2000-2022 returns nothing: the legacy group is empty.
+`G06N10`, meanwhile, is populated continuously across the same span, running at
+15 to 55 families a year through the 2000s before it begins to climb.
 
-**The diagnostic has not yet been run.** It is cheap: count families carrying
-`G06N99/002` by priority year and compare against `G06N10` over the same years. If
-the legacy code holds substantial mass in years where `G06N10` is thin, it belongs
-in the definition for the historical period. The code list in `config/sector.yaml`
-already carries it under `legacy`, unused.
+Both facts point the same way. The backfile was reclassified, old quantum
+computing families now carry `G06N10`, and the legacy group has been emptied
+behind them. There is no correction to make and no historical blind spot.
 
-## 8. Open: the shape of the volume curve
+This matters for how the takeoff can be described. Because the early years are
+genuinely sparse rather than merely missing, the inflection around 2013-2015 and
+the acceleration from 2018 are observations we can state rather than hedge.
+`G06N99/002` stays recorded under `legacy` in `config/sector.yaml`, unused, with
+this result as the reason.
 
-The Step 1 volume series has an unexpected shape. At family level it rises from
-about 1,065 families in 2000 to roughly 1,750 in 2004, falls to about 380 by
-2013–2014, and then climbs to 3,974 by 2022. That is a fall of close to 80% from
-the 2004 peak to the 2014 trough.
+## 8. Resolved: the volume curve measures two different things
 
-**We do not believe that is a real feature of quantum computing.** The field did
-not contract by four fifths between 2004 and 2014; by every other account,
-research activity and investment rose steadily across that period. A curve that
-contradicts the qualitative record that sharply is usually telling us something
-about the dataset rather than about the technology.
+The Step 1 volume series has an odd shape. At family level it rises from about
+1,065 families in 2000 to roughly 1,750 in 2004, falls to about 380 by 2013-2014,
+and only then climbs to 3,974 in 2022 — a fall of nearly 80% from peak to trough
+across a decade in which quantum computing research, funding and publication
+output all rose.
 
-The most likely explanation is composition. Our definition is a union of code
-blocks with different histories:
+We did not believe that was a property of the technology, so we decomposed the
+series: each block of the definition counted on its own, same window, same
+counting rules. The result (`outputs/tables/tab_blocks.csv`) is unambiguous.
 
-- **`B82Y10/00`** — nanotechnology for information processing. The `B82Y` scheme
-  was introduced well after the filings it covers and applied retroactively, so
-  it tags the early-2000s nanotechnology wave. That wave peaked around 2003–2005
-  and decayed, which is the shape of our early hump.
-- **`H10N60/12`** — Josephson devices. Superconducting electronics has a filing
-  history of its own, much of it unrelated to qubits.
-- **`H04L9/0852`**, **`H04B10/70`** — quantum communication, on its own
-  trajectory and heavily concentrated geographically.
-- **`G06N10`** — quantum computing proper, which we would expect to rise
-  monotonically from the mid-2010s.
+| Block | 2000 | 2010 | 2022 | CAGR 2000-2022 |
+|---|---:|---:|---:|---:|
+| `B82Y10/00` nanotechnology | 1,039 | 942 | 1,034 | **-0.0%** |
+| `G06N10` quantum computing | 15 | 19 | 1,915 | **+24.7%** |
+| `H04L9/0852` + `H04B10/70` quantum communication | 14 | 40 | 894 | +20.8% |
+| `H10N60/12` Josephson devices | 11 | 11 | 116 | +11.3% |
 
-If this is right, the series is not one phenomenon but at least two superimposed:
-a decaying nanotechnology wave and a rising quantum computing one. Every growth
-figure computed from a 2000 base would then be measuring the sum of the two, and
-the apparent decline-then-recovery would be an artefact of our own code list.
+Three things follow, and together they settle the question.
 
-**The diagnostic is cheap and decisive**: compute the volume series separately
-for each code block and plot them together. If the early hump belongs to
-`B82Y10/00` and `G06N10` rises monotonically, the question answers itself.
+**The hump is entirely `B82Y10/00`.** It accounts for 96% of the year-2000 mass
+of these blocks and falls 89% from its 2004 peak to its 2014 trough — the
+early-2000s nanotechnology wave, tagged retroactively by a scheme introduced long
+after the filings it covers. The apparent decline of "the sector" through the
+2000s was the decay of that wave, not anything happening in quantum computing.
 
-Until that is run, treat the 2000-base growth figures as provisional. The
-2010-base figures are less exposed but not immune. Note the direction of the
-likely bias: a contaminated base year is an *inflated* base, so true quantum
-computing growth is probably **higher** than the numbers currently reported, not
-lower.
+**`B82Y10/00` carries no growth signal at all.** Over the full window it is flat:
+1,039 families in 2000, 1,034 in 2022, a compound rate of zero. It contributes
+the entire distortion and none of the trend.
+
+**Quantum computing never declined.** `G06N10` runs flat and small through the
+2000s, turns up around 2013, and rises monotonically thereafter: 15 families in
+2000 to 1,915 in 2022, a 128-fold increase at 24.7% a year. Against all patenting
+(4.46% at family level) that is **5.5 times the rate** over the full window and
+**7.5 times** over 2010-2022.
+
+### What this does to the reported figures
+
+Any growth rate computed on the union from a 2000 base compares a population that
+was 96% nanotechnology against one that is mostly quantum computing. It is not an
+understated growth rate; it is a ratio between two different things. The headline
+figures in the README are therefore stated on `G06N10`, with the union reported
+separately and its composition named.
+
+### Recommended change to the definition, not yet applied
+
+`B82Y10/00` should come out of the headline definition. It adds no trend, it
+dominates and distorts the early base, and the client's question is about quantum
+computing. Three options, in the order we would defend them:
+
+1. **Drop it**, and report quantum computing on `G06N10` plus the keyword branch.
+2. **Keep it, intersected with a keyword** — a nanotechnology family enters only
+   if it also mentions qubits or quantum computation. This recovers the genuine
+   quantum-hardware overlap, which is real after 2015, without the 2000s wave.
+3. **Keep it as its own segment**, never merged into a headline number.
+
+Option 2 is the better analysis and is what we would adopt. It is **not yet
+applied**: `config/sector.yaml` still carries the definition that produced the
+committed outputs, because changing the definition means re-running the pipeline
+and every figure with it. Config and results should move together or not at all.

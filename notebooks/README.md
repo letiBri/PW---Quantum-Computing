@@ -35,8 +35,15 @@ than a working session. Delete the cache file to force a recomputation.
 | 5 | Tables and attributes used |
 | 6 | The counting machinery: scopes, counting functions, helpers |
 | 7 | Volume, dating, and growth against all patenting |
+| 7.3 | Decomposition by block of the definition, and the legacy-scheme check |
 | 8 | Technology mix — CPC subclasses and WIPO fields *(to be written)* |
 | 9 | Geography — IP5 offices, applicant and inventor countries *(to be written)* |
+
+Section 7.3 is the one to read before quoting any growth figure. It separates the
+definition into its code blocks and shows that the apparent decline of the sector
+through the 2000s belongs to `B82Y10/00` — nanotechnology — rather than to
+quantum computing, which never declined at all. `docs/methodology.md` §8 carries
+the argument and the numbers.
 
 Sections 8 and 9 are mostly calls to functions that §6 already defines —
 `fractional_by_cpc_subclass`, `fractional_by_techn_field`, `count_by_office`,

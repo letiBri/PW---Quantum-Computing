@@ -133,41 +133,65 @@ therefore sums to the number of families rather than inflating it.
 
 ## What we have found so far
 
-**The sector grows roughly twice as fast as patenting overall.** At family level,
-quantum computing compounds at 6.17% a year over 2000–2022 against 4.46% for all
-patents. Over 2010–2022 the gap widens to 11.94% against 6.24% — the field changed
-gear in the 2010s rather than simply rising with the tide. The result holds at
-application level and on both base years, so it does not depend on a choice we
-made.
+A first pass on the whole dataset produced a curve that did not make sense: the
+sector appeared to peak around 2004, lose nearly 80% of its volume by 2014, and
+only then recover. Quantum computing did not contract by four fifths over that
+decade, so we decomposed the series by block of the definition. The result
+changed the finding, and it is set out in full in `docs/methodology.md` §8.
 
-**It remains very small.** 1,065 families in 2000 and 3,974 in 2022, against
-914,442 and 2,389,730 for world patenting — from 0.12% to 0.17% of all families.
-Its share grew by a factor of 1.4, which is real, but the sector is still under
-two families per thousand. Growth figures quoted without that base would badly
-mis-size the opportunity.
+**The apparent decline belonged to a different technology.** `B82Y10/00`,
+nanotechnology for information processing, accounts for 96% of our year-2000
+families and falls 89% from its 2004 peak to its 2014 trough — the early-2000s
+nanotechnology wave, tagged retroactively by a classification scheme introduced
+long after the filings it covers. Over the full window that block is flat: 1,039
+families in 2000, 1,034 in 2022, a compound rate of zero. It contributed the
+entire distortion and none of the trend.
 
-**Quantum inventions are protected unusually widely.** Dividing applications by
-families gives 2.30 jurisdictions per quantum invention in 2022, against 1.47 for
-patents generally — about 56% more. Applicants are paying substantially more to
-protect these inventions internationally, which is a revealed-preference signal of
-expected value and a sector-level analogue of the Globalization indicator used in
-Step 3.
+**Quantum computing itself never declined.** Counted on `G06N10` alone:
 
----
+| | 2000 | 2010 | 2022 | CAGR 2000–2022 |
+|---|---:|---:|---:|---:|
+| Quantum computing (`G06N10`) | 15 | 19 | 1,915 | **24.7%** |
+| All patenting | 914,442 | — | 2,389,730 | 4.46% |
+
+A **128-fold increase**, compounding at **24.7% a year against 4.46% for
+patenting as a whole — 5.5 times the rate**, rising to 7.5 times over 2010–2022.
+The series is flat and small through the 2000s, turns up around 2013 and rises
+monotonically thereafter.
+
+**The early years are real, not missing.** Quantum computing sat under
+`G06N99/002` before `G06N10` existed, so sparse early counts could have been a
+reclassification artefact rather than a fact about the field. Querying the legacy
+group returns nothing at all: the backfile was reclassified and the old group
+emptied. The 2013–2015 inflection can therefore be stated as an observation
+rather than hedged.
+
+**Quantum communication is not a rounding error.** `H04L9/0852` and `H04B10/70`
+together reach 894 families in 2022 against 1,915 for `G06N10`, growing at 20.8%
+a year. Roughly a third of recent activity in our dataset is a different market
+with a different geography, which is why the scope boundary has to be stated
+rather than assumed.
+
+**On the union, inventions are protected unusually widely.** Dividing
+applications by families gives 2.30 jurisdictions per invention in 2022 against
+1.47 for patents generally, about 56% more. This is computed on the full union
+and so inherits its composition; it should be recomputed on the core before it is
+quoted as a fact about quantum computing. If it survives, it is a sector-level
+analogue of the Globalization indicator used in Step 3.
 
 ## Status
 
 | Step | Content | State |
 |---|---|---|
-| 0 | Sector definition, extraction, cleaning | Query built and counted; **validation outstanding** |
-| 1 | General description: volume, growth, technology mix, geography | Volume and growth complete; technology mix and geography in progress |
+| 0 | Sector definition, extraction, cleaning | Query built, counted and decomposed by block; **validation outstanding** |
+| 1 | General description: volume, growth, technology mix, geography | Volume, growth and the block decomposition complete; technology mix and geography still to be written |
 | 2 | Competitive landscape: concentration, entrants, subfields, PEST | Not started |
 | 3 | Present score: influence, volume, success, globalization | Not started |
 | 4 | Future score: our own algorithm | Not started |
 | 5 | Magic Quadrant | Not started |
 | 6 | Strategic analysis and recommendation | Not started |
 
-Two items are known gaps rather than work merely not yet reached.
+Three items are known gaps rather than work merely not yet reached.
 
 **The query is not yet validated.** Reading the CPC scheme to choose codes is
 construction, not validation: it justifies the codes but produces no evidence
@@ -175,13 +199,22 @@ about what the resulting set actually contains. The protocol is set out in
 `docs/validation.md` — a stratified hand-labelled sample, drawn from the branches
 that can actually be wrong rather than uniformly from the union.
 
+**The definition still contains `B82Y10/00`.** The block decomposition shows it
+contributes no trend and distorts the early base badly enough to invert the
+sector's apparent direction. It should come out of the headline definition, or
+enter only in combination with a quantum keyword. The change is **not applied**:
+`config/sector.yaml` still holds the definition that produced the committed
+outputs, because changing it means re-running the pipeline and every figure with
+it, and a config that disagrees with the results it supposedly generated is worse
+than one that is merely improvable. `docs/methodology.md` §8 sets out the options.
+
 **The scope boundary needs settling.** Including `H04B10/70` and `H04L9/0852`
 makes this a quantum *technologies* study rather than a quantum *computing* one.
-Quantum key distribution is heavily patented and geographically concentrated, so
-the decision will show up in the applicant-country figures. The CPC subclass mix
-in Step 1 will quantify how much of the dataset it accounts for, after which we
-either justify keeping it or cut it. Either is defensible; leaving it unstated is
-not.
+We now know the size of the question: 894 families with a 2022 priority against
+1,915 for `G06N10`, growing at 20.8% a year. That is roughly a third of recent
+activity, which is too large to merge silently into a headline figure. Either
+keep it and report it as its own segment, or cut it — both are defensible, and
+leaving it unstated is not.
 
 ---
 
