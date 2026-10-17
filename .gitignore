@@ -1,0 +1,23 @@
+# Bulk PATSTAT data is never committed — the queries that produce it are.
+*.parquet
+outputs/*.pkl
+outputs/**/*.pkl
+data/
+*.csv.gz
+
+# Jupyter
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

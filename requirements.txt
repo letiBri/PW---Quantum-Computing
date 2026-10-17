@@ -1,0 +1,20 @@
+# The analysis runs inside the EPO Technology Intelligence Platform, which
+# supplies its own Python environment and the epo.tipdata client. This file
+# records what the code imports, so that the environment can be reconstructed
+# and so that a reviewer can see what the pipeline depends on.
+#
+# Before submission, freeze the exact versions from the TIP kernel:
+#
+#     pip freeze | grep -iE "pandas|numpy|matplotlib|sqlalchemy|pyyaml|epo" > requirements.lock
+#
+# and commit requirements.lock alongside this file. Versions below are lower
+# bounds consistent with the APIs used, not the versions TIP actually serves.
+
+pandas>=2.0
+numpy>=1.24
+matplotlib>=3.7
+SQLAlchemy>=2.0
+PyYAML>=6.0
+
+# Provided by the TIP platform — not installable from PyPI.
+# epo.tipdata.patstat

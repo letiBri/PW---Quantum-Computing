@@ -1,0 +1,111 @@
+# Sector definition — Quantum computing
+#
+# Every parameter that defines the dataset lives here, so that the analysis code
+# contains no hard-coded codes, keywords or years. Changing the sector boundary
+# is a change to this file, not to the pipeline.
+#
+# Team 30 · Innovation Management · A.Y. 2026/27 · Politecnico di Torino
+
+sector:
+  name: "Quantum computing"
+  client: "Dell"
+  team: 30
+
+# ---------------------------------------------------------------- CPC codes
+#
+# Matching is by prefix on the blank-stripped symbol, so "G06N10/00" selects
+# G06N10/00 and anything whose symbol string begins with it. Note that this is
+# a string prefix and not a hierarchy walk: "G06N10/00" does NOT select
+# G06N10/20, which is why every subgroup is listed explicitly below.
+#
+# Codes were selected by reading the official CPC scheme definitions at
+# https://www.cooperativepatentclassification.org, not the class titles alone.
+
+cpc:
+  # Core: quantum computing proper. G06N10/00 is titled
+  # "Quantum computing, i.e. information processing based on quantum-mechanical
+  # phenomena"; the five subgroups partition it.
+  core:
+    - "G06N10/00"   # Quantum computing (parent)
+    - "G06N10/20"   # Models of quantum computing, e.g. quantum circuits
+    - "G06N10/40"   # Physical realisations / architectures of quantum processors
+    - "G06N10/60"   # Quantum algorithms
+    - "G06N10/70"   # Quantum error correction, detection or prevention
+    - "G06N10/80"   # Quantum programming, SDKs, cloud access platforms
+
+  # Enabling hardware. Lower precision than the core: these classes also cover
+  # subject matter outside quantum computing, so families entering only through
+  # them are the ones most in need of validation.
+  hardware:
+    - "B82Y10/00"   # Nanotechnology for information processing, e.g. quantum computing
+    - "H10N60/12"   # Josephson-effect devices (basis of superconducting qubits)
+
+  # Quantum communication. Included in the current dataset; this is a scope
+  # decision, not a precision question — these families are correctly classified,
+  # the question is whether they belong to *this* sector. See docs/methodology.md.
+  communication:
+    - "H04B10/70"   # Photonic quantum communication
+    - "H04L9/0852"  # Quantum key distribution
+
+  # Pre-2019 scheme. Quantum computing sat under G06N99/002 before G06N10 was
+  # created. Not currently used: include it only if the backfile turns out to be
+  # incompletely reclassified. Diagnostic not yet run.
+  legacy:
+    - "G06N99/002"
+
+# ---------------------------------------------------------------- keywords
+#
+# Searched case-insensitively in titles (tls202) and abstracts (tls203), OR-ed
+# with the CPC codes. Terms are deliberately multi-word or technically specific:
+# the bare word "quantum" is unusable here, since quantum dot, quantum well and
+# quantum efficiency are optoelectronics vocabulary with no relation to computing.
+
+keywords:
+  - "quantum comput"          # stems to computing / computer / computers / computation
+  - "qubit"
+  - "qbit"
+  - "quantum bit"
+  - "quantum gate"
+  - "quantum logic gate"
+  - "quantum circuit"
+  - "quantum register"
+  - "quantum algorithm"
+  - "quantum annealing"
+  - "quantum annealer"
+  - "quantum error correction"
+  - "quantum supremacy"
+  - "quantum advantage"
+  - "quantum processor"
+  - "quantum processing unit"
+  - "transmon"
+  - "superconducting qubit"
+  - "trapped ion qubit"
+  - "topological qubit"
+  - "spin qubit"
+  - "photonic qubit"
+
+# ---------------------------------------------------------------- time window
+#
+# The window closes at 2022, as set by the course. Applications publish some
+# 18 months after the priority date and reach PATSTAT later still, so recent
+# priority years are structurally incomplete; ending the window at the last year
+# treated as complete means no incomplete year is ever plotted.
+
+time:
+  year_min: 2000
+  year_max: 2022
+  last_complete_year: 2022
+  family_time_column: "earliest_filing_year"   # family: earliest priority year
+  appln_time_column: "appln_filing_year"       # application: its own filing year
+
+# ---------------------------------------------------------------- counting rules
+
+counting:
+  ipr_type: "PI"                               # patents of invention; excludes utility models
+  ip5_offices: ["EP", "US", "CN", "JP", "KR"]
+  top_n: 8                                     # categories shown before pooling into "Other"
+
+# ---------------------------------------------------------------- environment
+
+patstat:
+  env: "PROD"                                  # TEST for development, PROD for reported numbers
