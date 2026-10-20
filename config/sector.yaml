@@ -129,3 +129,8 @@ counting:
 
 patstat:
   env: "PROD"                                  # TEST for development, PROD for reported numbers
+
+# ---------------------------------------------------------------- output paths
+
+output:
+  directory: "outputs"

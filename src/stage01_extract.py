@@ -26,8 +26,6 @@ from epo.tipdata.patstat.database.models import (
     TLS224_APPLN_CPC,
 )
 
-from config import load_config
-
 
 # --------------------------------------------------------------------------- #
 # Query building blocks
@@ -95,30 +93,3 @@ def count_families(patstat, db, query, label):
     return int(n)
 
 
-def main():
-    cfg = load_config()
-    patstat = PatstatClient(env=cfg.env)
-    db = patstat.orm()
-
-    print(f"{cfg.sector_name} | env: {cfg.env} | {cfg.year_min}-{cfg.year_max}")
-    print("-" * 42)
-
-    n_cpc = count_families(patstat, db, families_by_cpc(db, cfg.cpc_prefixes), "CPC branch")
-    n_kw = count_families(patstat, db, families_by_keywords(db, cfg.keywords), "Keyword branch")
-    n_union = count_families(patstat, db, sector_family_ids(db, cfg), "UNION (the sector)")
-
-    # The decomposition is what makes the two branches interpretable: how much
-    # does free text add that the classification system misses, and how much of
-    # the keyword branch is independently confirmed?
-    keyword_only = n_union - n_cpc
-    overlap = n_kw - keyword_only
-    print("-" * 42)
-    print(f"{'keyword-only families':<28} {keyword_only:>12,}  ({keyword_only / n_union:.1%} of sector)")
-    print(f"{'confirmed by both':<28} {overlap:>12,}  ({overlap / n_kw:.1%} of keyword branch)")
-
-    return {"cpc": n_cpc, "keywords": n_kw, "union": n_union,
-            "keyword_only": keyword_only, "overlap": overlap}
-
-
-if __name__ == "__main__":
-    main()

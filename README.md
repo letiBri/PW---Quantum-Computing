@@ -37,14 +37,16 @@ revenue exists.
 ├── config/
 │   └── sector.yaml          every parameter of the dataset: codes, keywords, years
 ├── notebooks/               exploration and the Step 1 analysis as run on TIP
-├── src/                     the pipeline, as it is refactored out of the notebooks
+├── src/                     modules and scripts for the main pipeline
 ├── outputs/
+│   ├── cache/               cached values to avoid longs cell execution
 │   ├── figures/             figures referenced by the deck
 │   └── tables/              result tables
 ├── docs/
 │   ├── methodology.md       choices that need defending, and why we made them
 │   └── validation.md        the Step 0 validation protocol and its results
 ├── tests/
+├── main.py                  main pipeline, as it is refactored out of the notebooks
 ├── requirements.txt
 └── README.md
 ```
@@ -199,7 +201,7 @@ indicator used in Step 3.
 | Step | Content | State |
 |---|---|---|
 | 0 | Sector definition, extraction, cleaning | Query built, counted and decomposed by block; **validation outstanding** |
-| 1 | General description: volume, growth, technology mix, geography | Volume, growth and the block decomposition complete; technology mix and geography still to be written |
+| 1 | General description: volume, growth, technology mix, geography | Volume, growth, the block decomposition, technology mix and geography complete|
 | 2 | Competitive landscape: concentration, entrants, subfields, PEST | Not started |
 | 3 | Present score: influence, volume, success, globalization | Not started |
 | 4 | Future score: our own algorithm | Not started |
