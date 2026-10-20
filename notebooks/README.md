@@ -4,6 +4,7 @@ The analysis as actually run on the EPO Technology Intelligence Platform.
 
 | Notebook | Covers | State |
 |---|---|---|
+| `STEP0_validation.ipynb` | PW Step 0 — draws the stratified hand-labelling sample of `docs/validation.md` (§1–§5) and computes precision from the labels (§7) | Written; not yet run on PROD |
 | `STEP1_general_description.ipynb` | PW Step 1 — volume, growth, and the dating of the series | §1–§7 complete on PROD; §8 (technology mix) and §9 (geography) still to be written |
 
 These notebooks run on TIP and nowhere else: they import `epo.tipdata.patstat`,
@@ -38,6 +39,7 @@ than a working session. Delete the cache file to force a recomputation.
 | 7.3 | Decomposition by block of the definition, and the legacy-scheme check |
 | 8 | Technology mix — CPC subclasses and WIPO fields *(to be written)* |
 | 9 | Geography — IP5 offices, applicant and inventor countries *(to be written)* |
+| 10 | Appropriability — protection per invention against all patents, applicant types; feeds `docs/appropriability.md` |
 
 Section 7.3 is the one to read before quoting any growth figure. It separates the
 definition into its code blocks and shows that the apparent decline of the sector

@@ -32,8 +32,8 @@ actually fail.
 
 | Stratum | Population | Sample | What it tests |
 |---|---:|---:|---|
-| A — core CPC (`G06N10` only) | | 20 | sanity check; expected near-perfect |
-| B — peripheral hardware only (`H10N60/12`, no core code) | | 20 | precision of the enabling-hardware class |
+| A — core CPC (`G06N10` only) | 6,293 | 20 | sanity check; expected near-perfect |
+| B — peripheral hardware only (`H10N60/12`, no core code) | 563 | 20 | precision of the enabling-hardware class |
 | C — keyword-only (no CPC match at all) | 3,468 | 60 | precision of the free-text branch |
 
 Stratum C is weighted most heavily because it is where the uncertainty now sits.
@@ -85,16 +85,16 @@ they include that we do not, together with the reason for excluding it.
 
 | Stratum | n | Precision | 95% CI |
 |---|---:|---:|---|
-| A — core CPC | | | |
-| B — peripheral hardware | | | |
-| C — keyword-only | | | |
-| **Weighted total** | | | |
+| A — core CPC | 20 | 70.0% (14/20) | 48.1–85.5% |
+| B — peripheral hardware | 20 | 5.0% (1/20) | 0.9–23.6% |
+| C — keyword-only | 60 | 35.0% (21/60) | 24.2–47.6% |
+| **Weighted total** | 100 | **58.5%** | 43.7–73.3% |
 
 Sector size at the time of labelling: 23,492 families (CPC 20,024, keywords
 11,599, keyword-only 3,468).
 
-Inter-rater disagreement rate:
+Inter-rater disagreement rate: 23% (23 of 100 families; agreement 77%, Cohen's kappa 0.49)
 
 Date of labelling:
 
-Labelled by:
+Labelled by: Amirtay Almarua, Thekkedath Prince
