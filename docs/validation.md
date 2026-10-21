@@ -81,14 +81,31 @@ they include that we do not, together with the reason for excluding it.
 
 ## Results
 
-*To be completed once the sample has been labelled.*
+The currently committed final labels identify 36 relevant families out
+of 100 sampled families: an unweighted sample precision of 36%.
+
+The population-weighted estimate for groups A–C is 58.5%:
+
+(6,293 × 70% + 563 × 5% + 1,796 × 35%) / 8,652 = 58.5%.
+
+These percentages measure different things. The sample contains
+20 families from A, 20 from B, and 60 from C. Weighting adjusts
+their contributions to reflect each group's size in the database.
+
+The 58.5% estimate covers groups A–C only: 8,652 of the 13,505
+families in the filtered validation population. The remaining
+4,853 communication-group families have not been sampled, so
+full-sector precision has not yet been estimated.
+
+These results remain subject to team confirmation of the final
+decisions on disputed labels.
 
 | Stratum | n | Precision | 95% CI |
 |---|---:|---:|---|
 | A — core CPC | 20 | 70.0% (14/20) | 48.1–85.5% |
 | B — peripheral hardware | 20 | 5.0% (1/20) | 0.9–23.6% |
 | C — keyword-only | 60 | 35.0% (21/60) | 24.2–47.6% |
-| **Weighted total** | 100 | **58.5%** | 43.7–73.3% |
+| **Weighted estimate — A–C only** | 100 | **58.5%** | 43.7–73.3% |
 
 Sector size at the time of labelling: 23,492 families (CPC 20,024, keywords
 11,599, keyword-only 3,468).
