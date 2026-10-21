@@ -92,7 +92,8 @@ needed to recognise it.
 
 ### What the two branches contribute
 
-Run on PROD over 2000–2022, at family level:
+Broad extraction counts on PROD, at family level, before applying
+the validation population's year and patent-type restrictions:
 
 | Branch | Families | Share of union |
 |---|---:|---:|
