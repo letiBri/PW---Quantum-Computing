@@ -1,6 +1,6 @@
 # Validating the sector definition
 
-**Status: protocol agreed, sample not yet drawn.**
+**Status: the initial 100-family sample and validation results are available. Final-label decisions still need team confirmation, and communication-only families have not yet been sampled.**
 
 The project brief asks us to hand-label about 100 random families, or to find
 another defensible way of validating the query. This note sets out what we will
