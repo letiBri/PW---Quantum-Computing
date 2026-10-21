@@ -128,6 +128,11 @@ decisions on disputed labels.
 | C — keyword-only | 60 | 35.0% (21/60) | 24.2–47.6% |
 | **Weighted estimate — A–C only** | 100 | **58.5%** | 43.7–73.3% |
 
+The 43.7–73.3% interval is the current code's approximate
+uncertainty range for the weighted estimate across groups A–C.
+It does not cover the unsampled communication group and must
+not be interpreted as an uncertainty range for the full sector.
+
 The filtered validation population contains 13,505 families:
 8,652 in sampled groups A–C and 4,853 in the unsampled
 communication group.
