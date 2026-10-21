@@ -28,24 +28,35 @@ actually fail.
 
 ## Protocol
 
-**Strata.** Three groups, sampled independently:
+**Strata.** The initial sample covers groups A–C. Group D is the
+remaining communication-code population and has not yet been sampled.
 
 | Stratum | Population | Sample | What it tests |
 |---|---:|---:|---|
-| A — core CPC (`G06N10` only) | 6,293 | 20 | sanity check; expected near-perfect |
-| B — peripheral hardware only (`H10N60/12`, no core code) | 563 | 20 | precision of the enabling-hardware class |
-| C — keyword-only (no CPC match at all) | 3,468 | 60 | precision of the free-text branch |
+| A — core CPC matches | 6,293 | 20 | Relevance of core-code matches |
+| B — hardware matches without a core-code match | 563 | 20 | Relevance of peripheral hardware |
+| C — keyword matches without any selected CPC match | 1,796 | 60 | Relevance of keyword-only matches |
+| D — remaining communication-code families | 4,853 | 0 | Not yet sampled |
+| **Total** | **13,505** | **100** | Complete filtered validation population |
 
-Stratum C is weighted most heavily because it is where the uncertainty now sits.
-After `B82Y10/00` was removed from the definition (`docs/methodology.md` §8),
-keyword-only families rose from 6.6% to 14.8% of the dataset: roughly one family
-in seven now rests on free-text matching with no classification support. The
-branch that most needs measuring is also the one that grew.
+These population counts come from `outputs/tables/validation_population.csv`
+and describe patents of invention with family earliest-priority years
+from 2000 to 2022.
 
-Families reachable only through the quantum-communication codes
-(`H04B10/70`, `H04L9/0852`) are a **scope** question rather than a precision
-question — they are correctly classified, the issue is whether they belong in
-this sector — and are handled in `docs/methodology.md`, not here.
+Group C has the largest sample, but group A has the largest population
+weight. Sample size and population weight are different.
+
+Groups A–C cover 8,652 families, or 64.1% of the population.
+The remaining 4,853 families, or 35.9%, have not been sampled.
+
+Families carrying communication codes may already belong to A or B
+if they also meet those groups' definitions. Group D contains the
+remaining families.
+
+Because communication codes are included in the analysis, this
+remaining group also needs validation before full-sector precision
+can be reported. The team must first agree on the relevance definition
+for quantum communication.
 
 **Labelling.** For each sampled family, read the title and the English abstract
 of the earliest member and record one of:
