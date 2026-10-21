@@ -7,7 +7,7 @@ another defensible way of validating the query. This note sets out what we will
 do and why, so that the result can be reported as a measurement rather than an
 assertion.
 
-## Why the work so far is not yet validation
+## Why choosing classification codes is not enough
 
 We chose CPC codes by reading the official scheme definitions. That is
 *construction*: it justifies why each code is in the list. It produces no
