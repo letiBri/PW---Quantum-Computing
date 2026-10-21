@@ -55,3 +55,23 @@ Sections 8 and 9 are mostly calls to functions that §6 already defines —
 `fractional_by_country`, and the presentation helpers. They should be written
 against those, not from scratch, and each query wrapped in `cached()` the same
 way §7 does.
+
+## Validation files
+
+The validation workflow uses files in `outputs/tables/`:
+
+- `validation_sample.csv`: the sampled families and their groups.
+- `validation_population.csv`: the population sizes used for weighting.
+- `validation_to_label.csv`: a blank template for the two raters.
+- `validation_labels.csv`: the completed labels read by the results section.
+- `validation_results.csv`: the calculated validation results.
+
+The blank `validation_to_label.csv` template is not currently committed.
+It is not needed to calculate results once `validation_labels.csv` exists.
+
+The notebook's writing cell skips all sample-file exports when
+`validation_sample.csv` already exists. Rerunning that cell therefore
+does not recreate a missing blank template.
+
+Preserve the existing sample and completed labels. Do not delete them
+merely to regenerate the blank template.
