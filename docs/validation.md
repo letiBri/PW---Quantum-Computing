@@ -128,8 +128,13 @@ decisions on disputed labels.
 | C — keyword-only | 60 | 35.0% (21/60) | 24.2–47.6% |
 | **Weighted estimate — A–C only** | 100 | **58.5%** | 43.7–73.3% |
 
-Sector size at the time of labelling: 23,492 families (CPC 20,024, keywords
-11,599, keyword-only 3,468).
+The filtered validation population contains 13,505 families:
+8,652 in sampled groups A–C and 4,853 in the unsampled
+communication group.
+
+The separate extraction count of 23,492 families was calculated
+before applying the validation population's year and patent-type
+restrictions. It is not the denominator used for the validation weights.
 
 Inter-rater disagreement rate: 23% (23 of 100 families; agreement 77%, Cohen's kappa 0.49)
 
