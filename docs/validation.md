@@ -16,15 +16,19 @@ claims, and only the second is validation.
 
 ## Why we do not sample uniformly
 
-A uniform draw of 100 families from the union of 50,239 would return roughly 93
-families selected by CPC and 7 selected by keywords alone. The CPC branch is
-dominated by `G06N10`, a class literally titled "Quantum computing" — its
-precision is close to unity by construction, and confirming that across 93
-families teaches us nothing we did not already know. Meanwhile the branch most
-likely to be wrong would be represented by seven observations.
+We divided the initial sample into three groups: core-code matches,
+peripheral hardware matches, and keyword-only matches. This allows
+us to examine each group's relevance separately.
 
-We therefore stratify, and sample from the parts of the definition that can
-actually fail.
+We sampled 20 families from A, 20 from B, and 60 from C.
+Keyword-only families therefore make up 60% of the sample, although
+they represent a much smaller share of the database population.
+
+For this reason, we report both the unweighted sample precision
+and the population-weighted estimate for the sampled groups.
+
+A classification code does not guarantee relevance to our research
+question. Core-code matches also require validation.
 
 ## Protocol
 
