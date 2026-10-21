@@ -82,9 +82,15 @@ $$
 p = \frac{N_A p_A + N_B p_B + N_C p_C}{N_A + N_B + N_C}
 $$
 
-Report the per-stratum figures as well as the weighted total. A poor $p_C$ is
-actionable: it means the keyword branch can be dropped, at a known cost of 6.6%
-of the dataset.
+Report each group's precision, the unweighted sample precision,
+and the population-weighted estimate for groups A–C.
+
+Low precision in a group means we should investigate why irrelevant
+families were selected. It does not automatically justify removing
+the entire group, because relevant families could also be lost.
+
+Any revised extraction rules should be assessed using a new,
+independent validation sample.
 
 ## Recall
 
