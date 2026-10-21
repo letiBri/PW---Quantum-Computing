@@ -200,7 +200,7 @@ indicator used in Step 3.
 
 | Step | Content | State |
 |---|---|---|
-| 0 | Sector definition, extraction, cleaning | Query built, counted and decomposed by block; **validation outstanding** |
+| 0 | Sector definition, extraction, cleaning | Initial validation sample and results committed; final-label confirmation and communication validation pending |
 | 1 | General description: volume, growth, technology mix, geography | Volume, growth, the block decomposition, technology mix and geography complete|
 | 2 | Competitive landscape: concentration, entrants, subfields, PEST | Not started |
 | 3 | Present score: influence, volume, success, globalization | Not started |
@@ -210,14 +210,15 @@ indicator used in Step 3.
 
 Two items are known gaps rather than work merely not yet reached.
 
-**The query is not yet validated.** Reading the CPC scheme to choose codes is
-construction, not validation: it justifies the codes but produces no evidence
-about what the resulting set actually contains. The protocol is in
-`docs/validation.md` — a stratified hand-labelled sample, drawn from the branches
-that can actually be wrong rather than uniformly from the union. This matters
-more after the correction than before it: the keyword-only stratum is now 14.8%
-of the dataset rather than 6.6%, so the branch carrying no independent
-confirmation now holds roughly one family in seven.
+**Validation is partially complete.** The committed final labels identify
+36 relevant families among 100 sampled families. The population-weighted
+estimate is 58.5% for groups A–C only. These groups cover 8,652 of the
+13,505 families in the filtered validation population.
+
+The remaining 4,853 communication-group families have not been sampled.
+Full-sector precision has therefore not yet been estimated. The team
+must also confirm the final decisions on disputed labels.
+See `docs/validation.md` for the calculation and limitations.
 
 **The scope boundary needs settling.** Including `H04B10/70` and `H04L9/0852`
 makes this a quantum *technologies* study rather than a quantum *computing* one.
