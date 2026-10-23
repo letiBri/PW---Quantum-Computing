@@ -1,4 +1,4 @@
-# Methodological Notes: Applicant Harmonization & Entity Linking
+# Applicant Harmonization & Entity Linking
 
 This document records the design choices, pipeline structure, and validation strategy for harmonizing applicant names (`applicants`).
 
