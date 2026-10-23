@@ -27,7 +27,8 @@ def main():
 
     # count families obtained by cpc / keywords and their union
     n_cpc = count_families(patstat, db, families_by_cpc(db, cfg.cpc_prefixes), "CPC branch")
-    n_kw = count_families(patstat, db, families_by_keywords(db, cfg.keywords), "Keyword branch")
+    n_kw = count_families(patstat, db, families_by_keywords(db, cfg.keywords, cfg.keyword_exclusions),
+                          "Keyword branch")
     n_union = count_families(patstat, db, sector_family_ids(db, cfg), "UNION (the sector)")
 
     # The decomposition is what makes the two branches interpretable: how much

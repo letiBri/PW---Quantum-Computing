@@ -35,9 +35,10 @@ cpc:
 
   # Enabling hardware. Lower precision than the core: these classes also cover
   # subject matter outside quantum computing, so families entering only through
-  # them are the ones most in need of validation.
-  hardware:
-    - "H10N60/12"   # Josephson-effect devices (basis of superconducting qubits)
+  # them are the ones most in need of validation. Empty since 23 October: the
+  # validation showed H10N60/12 does not identify quantum computing on its own
+  # (see `excluded` below).
+  hardware: []
 
   # Deliberately excluded, with the evidence. These codes were in the definition
   # until 17 October and were removed after the block decomposition
@@ -54,6 +55,15 @@ cpc:
     # the sector. Genuine quantum-nanotechnology families still enter through
     # the keyword branch, which is why removing it costs coverage but not signal.
     - "B82Y10/00"
+
+    # H10N60/12 — Josephson-effect devices. Removed on 23 October after the
+    # hand-labelled validation (docs/validation.md): of 20 families entering
+    # only through this code, 1 was quantum computing. The class covers
+    # Josephson junctions in general — superconducting electronics, memories,
+    # junction fabrication. Superconducting-qubit families carry a G06N10 code
+    # or a qubit keyword and still enter through those; the cost is at most 563
+    # families, 4.2% of the 2000-2022 sector.
+    - "H10N60/12"
 
   # Quantum communication. Included in the current dataset; this is a scope
   # decision, not a precision question — these families are correctly classified,
@@ -79,9 +89,16 @@ cpc:
 # with the CPC codes. Terms are deliberately multi-word or technically specific:
 # the bare word "quantum" is unusable here, since quantum dot, quantum well and
 # quantum efficiency are optoelectronics vocabulary with no relation to computing.
+#
+# "quantum comput" was removed on 23 October after the validation
+# (docs/validation.md). It matched 27 of the 39 keyword-only false positives:
+# patents that name quantum computing only as a possible use ("...using quantum
+# computing") or that defend against it (post-quantum cryptography). A family
+# that is really about quantum computing almost always also names one of the
+# specific terms below, so it still enters; in the validation sample 16 of the
+# 21 genuine keyword-only families did.
 
 keywords:
-  - "quantum comput"          # stems to computing / computer / computers / computation
   - "qubit"
   - "qbit"
   - "quantum bit"
@@ -103,6 +120,29 @@ keywords:
   - "topological qubit"
   - "spin qubit"
   - "photonic qubit"
+
+# An application matching a keyword is still left out of the keyword branch when
+# its title or abstract contains one of these phrases. They mark post-quantum
+# cryptography: classical encryption built to resist future quantum computers,
+# which mentions quantum computing without being about it. In the validation
+# sample none of the keyword-only families carrying such a phrase was quantum
+# computing. Applied to the keyword branch only: a family with a G06N10 code is
+# kept whatever its text says.
+
+keyword_exclusions:
+  - "anti-quantum"
+  - "post-quantum"
+  - "quantum-resistant"
+  - "quantum resistant"
+  - "quantum-safe"
+  - "quantum safe"
+  - "resist quantum"
+  - "resisting quantum"
+  - "resistant to quantum"
+  - "quantum attack"
+  - "quantum computer attack"
+  - "quantum computing attack"
+  - "secure from quantum"
 
 # ---------------------------------------------------------------- time window
 #

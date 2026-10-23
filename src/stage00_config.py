@@ -6,14 +6,11 @@ hard-codes them. This module is the single place that reads that file.
 
 Usage, from a notebook on TIP or from a script in this folder::
 
-    from config import load_config
+    from stage00_config import load_config      # with src/ on sys.path
+    from src.stage00_config import load_config  # from the repository root, as main.py does
 
     cfg = load_config()
     print(cfg.sector_name, len(cfg.cpc_prefixes), "CPC codes")
-
-Run it directly to check that the file parses and to see what it contains::
-
-    python src/config.py
 """
 
 from __future__ import annotations
@@ -41,6 +38,7 @@ class SectorConfig:
     cpc_legacy: tuple[str, ...]
     cpc_excluded: tuple[str, ...]
     keywords: tuple[str, ...]
+    keyword_exclusions: tuple[str, ...]
 
     year_min: int
     year_max: int
@@ -94,11 +92,12 @@ def load_config(path: Path | str = DEFAULT_CONFIG_PATH) -> SectorConfig:
         client=raw["sector"]["client"],
         team=int(raw["sector"]["team"]),
         cpc_core=tuple(cpc["core"]),
-        cpc_hardware=tuple(cpc["hardware"]),
+        cpc_hardware=tuple(cpc.get("hardware") or ()),
         cpc_communication=tuple(cpc["communication"]),
         cpc_legacy=tuple(cpc.get("legacy", ())),
         cpc_excluded=tuple(cpc.get("excluded", ())),
         keywords=tuple(raw["keywords"]),
+        keyword_exclusions=tuple(raw.get("keyword_exclusions") or ()),
         year_min=int(time["year_min"]),
         year_max=int(time["year_max"]),
         last_complete_year=int(time["last_complete_year"]),
