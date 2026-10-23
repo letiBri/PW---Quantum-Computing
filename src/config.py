@@ -42,6 +42,7 @@ class SectorConfig:
     cpc_legacy: tuple[str, ...]
     cpc_excluded: tuple[str, ...]
     keywords: tuple[str, ...]
+    keyword_exclusions: tuple[str, ...]
 
     year_min: int
     year_max: int
@@ -92,11 +93,12 @@ def load_config(path: Path | str = DEFAULT_CONFIG_PATH) -> SectorConfig:
         client=raw["sector"]["client"],
         team=int(raw["sector"]["team"]),
         cpc_core=tuple(cpc["core"]),
-        cpc_hardware=tuple(cpc["hardware"]),
+        cpc_hardware=tuple(cpc.get("hardware") or ()),
         cpc_communication=tuple(cpc["communication"]),
         cpc_legacy=tuple(cpc.get("legacy", ())),
         cpc_excluded=tuple(cpc.get("excluded", ())),
         keywords=tuple(raw["keywords"]),
+        keyword_exclusions=tuple(raw.get("keyword_exclusions") or ()),
         year_min=int(time["year_min"]),
         year_max=int(time["year_max"]),
         last_complete_year=int(time["last_complete_year"]),
@@ -124,3 +126,4 @@ if __name__ == "__main__":
     print(f"CPC legacy       ({len(cfg.cpc_legacy)}, unused): {', '.join(cfg.cpc_legacy)}")
     print(f"CPC excluded     ({len(cfg.cpc_excluded)}, by decision): {', '.join(cfg.cpc_excluded)}")
     print(f"Keywords         ({len(cfg.keywords)})")
+    print(f"Keyword excl.    ({len(cfg.keyword_exclusions)}): {', '.join(cfg.keyword_exclusions)}")

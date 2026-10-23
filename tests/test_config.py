@@ -68,6 +68,29 @@ def test_excluded_codes_are_not_in_the_active_definition(cfg):
     assert not set(cfg.cpc_excluded) & set(cfg.cpc_prefixes)
 
 
+def test_josephson_code_is_out_after_validation(cfg):
+    """H10N60/12 was dropped on evidence: 1 of 20 families entering only through
+    it was quantum computing (docs/validation.md). It stays recorded as excluded."""
+    assert "H10N60/12" in cfg.cpc_excluded
+    assert "H10N60/12" not in cfg.cpc_prefixes
+
+
+def test_generic_quantum_computing_stem_is_not_a_keyword(cfg):
+    """'quantum comput' matched 27 of 39 keyword-only false positives: passing
+    mentions and post-quantum cryptography. Only specific terms select a family."""
+    assert "quantum comput" not in cfg.keywords
+
+
+def test_keyword_exclusions_cannot_cancel_a_keyword(cfg):
+    """An exclusion phrase contained in a keyword would drop every match of that
+    keyword; one contained in an exclusion of its own is merely redundant."""
+    assert cfg.keyword_exclusions, "the post-quantum exclusions should be configured"
+    for phrase in cfg.keyword_exclusions:
+        assert phrase == phrase.strip().lower(), f"{phrase!r} is not lower-case and stripped"
+        for term in cfg.keywords:
+            assert phrase not in term, f"exclusion {phrase!r} would cancel keyword {term!r}"
+
+
 def test_communication_codes_are_separable(cfg):
     """The scope boundary must be testable without editing the pipeline."""
     assert set(cfg.cpc_communication) <= set(cfg.cpc_prefixes)
