@@ -11,6 +11,11 @@ All figures and tables below are from the run of 17 October, on PROD, with
 | `fig_volume.png` | Families and applications per year, with the PCT share, at both levels | Landscape slide |
 | `fig_dating.png` | The same patents dated by filing, publication and priority year | Technical appendix |
 | `fig_growth.png` | Sector growth against all patenting, indexed to 2000 | Landscape slide |
+| `fig_applicants_countries_over_time.png` | Countries of origin of each applicant over time | Landscape slide |
+| `fig_cpc_subclasses.png` | Shares of CPC subclasses over time | Landscape slide |
+| `fig_fillings_at_the_ip5_offices.png` | Fillings at the IP5 offices over time | Landscape slide |
+| `fig_wipo_sectors.png` | Shares across the 5 WIPO technology sectors | Landscape slide |
+| `heatmap_fillings_at_the_ip5_offices.png` | Fillings at the IP5 offices heatmap | Landscape slide |
 | `fig_blocks.png` | Each block of the definition counted separately | **Technical appendix — see below** |
 
 `fig_blocks.png` is the one to keep. It is the evidence behind excluding
@@ -30,6 +35,12 @@ the analysis than one more growth curve does.
 | `tab_growth.csv` | Counts and growth for the sector and for all patenting, at both levels, from 2000 and from 2010 |
 | `tab_blocks.csv` | Families per year for each block of the definition |
 | `sector_definition_counts.csv` | Families caught by the CPC branch, the keyword branch, their overlap, and the union |
+| `tab_cpc_subclasses.csv` | Shares of CPC subclasses|
+| `tab_sector_geo_shares.csv` | Shares of countries of origin (general)|
+| `tab_sector_geo_shares_with_unknown.csv` | Shares of countries of origin for both applicant and inventor countries (WITH unknown / null countries)   |
+| `tab_sector_geo_shares_without_unknown.csv` | Shares of countries of origin for both applicant and inventor countries (WITHOUT unknown / null countries) |
+| `tab_wipo_fields.csv` | Shares of WIPO technology fields |
+| `tab_wipo_sectors.csv` | Shares of WIPO technology sectors |
 
 ## cache/
 

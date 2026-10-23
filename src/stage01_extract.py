@@ -8,7 +8,7 @@ does in its section 2.1, with the codes and keywords read from
 Runs only inside the EPO Technology Intelligence Platform, which supplies the
 ``epo.tipdata`` client and authenticated access to PATSTAT::
 
-    python src/01_extract.py
+    python main.py
 
 Expect a few minutes on PROD: the keyword branch scans titles and abstracts
 across the whole database.
@@ -25,8 +25,6 @@ from epo.tipdata.patstat.database.models import (
     TLS203_APPLN_ABSTR,
     TLS224_APPLN_CPC,
 )
-
-from config import load_config
 
 
 # --------------------------------------------------------------------------- #
@@ -103,33 +101,3 @@ def count_families(patstat, db, query, label):
     ).loc[0, "n"]
     print(f"{label:<28} {n:>12,}")
     return int(n)
-
-
-def main():
-    cfg = load_config()
-    patstat = PatstatClient(env=cfg.env)
-    db = patstat.orm()
-
-    print(f"{cfg.sector_name} | env: {cfg.env} | {cfg.year_min}-{cfg.year_max}")
-    print("-" * 42)
-
-    n_cpc = count_families(patstat, db, families_by_cpc(db, cfg.cpc_prefixes), "CPC branch")
-    n_kw = count_families(patstat, db, families_by_keywords(db, cfg.keywords, cfg.keyword_exclusions),
-                          "Keyword branch")
-    n_union = count_families(patstat, db, sector_family_ids(db, cfg), "UNION (the sector)")
-
-    # The decomposition is what makes the two branches interpretable: how much
-    # does free text add that the classification system misses, and how much of
-    # the keyword branch is independently confirmed?
-    keyword_only = n_union - n_cpc
-    overlap = n_kw - keyword_only
-    print("-" * 42)
-    print(f"{'keyword-only families':<28} {keyword_only:>12,}  ({keyword_only / n_union:.1%} of sector)")
-    print(f"{'confirmed by both':<28} {overlap:>12,}  ({overlap / n_kw:.1%} of keyword branch)")
-
-    return {"cpc": n_cpc, "keywords": n_kw, "union": n_union,
-            "keyword_only": keyword_only, "overlap": overlap}
-
-
-if __name__ == "__main__":
-    main()

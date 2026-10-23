@@ -6,18 +6,14 @@ hard-codes them. This module is the single place that reads that file.
 
 Usage, from a notebook on TIP or from a script in this folder::
 
-    from config import load_config
+    from stage00_config import load_config      # with src/ on sys.path
+    from src.stage00_config import load_config  # from the repository root, as main.py does
 
     cfg = load_config()
     print(cfg.sector_name, len(cfg.cpc_prefixes), "CPC codes")
-
-Run it directly to check that the file parses and to see what it contains::
-
-    python src/config.py
 """
 
 from __future__ import annotations
-
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -55,6 +51,8 @@ class SectorConfig:
     top_n: int
     env: str
 
+    output: str
+
     raw: dict = field(repr=False, default_factory=dict)
 
     @property
@@ -88,6 +86,7 @@ def load_config(path: Path | str = DEFAULT_CONFIG_PATH) -> SectorConfig:
     time = raw["time"]
     counting = raw["counting"]
 
+
     return SectorConfig(
         sector_name=raw["sector"]["name"],
         client=raw["sector"]["client"],
@@ -109,21 +108,5 @@ def load_config(path: Path | str = DEFAULT_CONFIG_PATH) -> SectorConfig:
         top_n=int(counting["top_n"]),
         env=raw["patstat"]["env"],
         raw=raw,
+        output=str(raw["output"]['directory']),
     )
-
-
-if __name__ == "__main__":
-    cfg = load_config()
-    print(f"Sector   : {cfg.sector_name}  (client: {cfg.client}, team {cfg.team})")
-    print(f"Window   : {cfg.year_min}-{cfg.year_max}, complete to {cfg.last_complete_year}")
-    print(f"Family y : {cfg.family_time_column}")
-    print(f"Appln y  : {cfg.appln_time_column}")
-    print(f"Env      : {cfg.env}")
-    print()
-    print(f"CPC core         ({len(cfg.cpc_core)}): {', '.join(cfg.cpc_core)}")
-    print(f"CPC hardware     ({len(cfg.cpc_hardware)}): {', '.join(cfg.cpc_hardware)}")
-    print(f"CPC communication({len(cfg.cpc_communication)}): {', '.join(cfg.cpc_communication)}")
-    print(f"CPC legacy       ({len(cfg.cpc_legacy)}, unused): {', '.join(cfg.cpc_legacy)}")
-    print(f"CPC excluded     ({len(cfg.cpc_excluded)}, by decision): {', '.join(cfg.cpc_excluded)}")
-    print(f"Keywords         ({len(cfg.keywords)})")
-    print(f"Keyword excl.    ({len(cfg.keyword_exclusions)}): {', '.join(cfg.keyword_exclusions)}")
