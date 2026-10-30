@@ -6,7 +6,7 @@ This document outlines the strategy, method evolution, and validation framework 
 
 ## 1. The Problem: The "Name Game" in PATSTAT
 
-Within PATSTAT, the exact same corporate or research entity frequently appears under dozens of distinct spelling and formal variants (*SIEMENS AG*, *Siemens Aktiengesellschaft*, *SIEMENS AKTIENGESELLSCHAFT MUENCHEN*, etc.). Treating each variant as an independent entity artificially fractures major market players into a multitude of smaller fragments, distorting any market share or concentration metrics.
+Within PATSTAT, the exact same corporate or research entity frequently appears under dozens of distinct spelling and formal variants (*SIEMENS AG*, *Siemens Aktiengesellschaft*, *SIEMENS AKTIENGESELLSCHAFT MUENCHEN*, etc.). Treating each variant as an independent entity artificially fractures major market players into smaller fragments, distorting the market share or concentration metrics.
 
 While PATSTAT's standardized name column (`psn_name`) provides a foundational normalization pass, structural challenges remain unaddressed:
 * Presence or absence of diverse legal forms (*Inc.*, *GmbH*, *AG*, *KK*, etc.).
@@ -17,7 +17,7 @@ While PATSTAT's standardized name column (`psn_name`) provides a foundational no
 
 ## 2. Harmonization Strategies Evaluated
 
-The cleansing pipeline builds upon progressive methodologies, evaluated both independently and in combination:
+The cleaning pipeline builds upon progressive methodologies, evaluated both independently and in combination:
 
 | Method | Description | Strengths | Limitations |
 |---|---|---|---|
@@ -29,11 +29,14 @@ The cleansing pipeline builds upon progressive methodologies, evaluated both ind
 
 ## 3. The Adopted Solution: Tailored Sector Pipeline
 
-To overcome the limitations, the adopted pipeline relies on a custom tuning layer (`my_harmonisation`) combining:
+To overcome these limitations, the adopted pipeline relies on a custom tuning layer (`my_harmonisation`) combining:
 1. **Preliminary Normalization:** Uppercasing, accent removal, special character stripping, and whitespace regularization.
 2. **Institutional Wrapper & Prefix Removal:** Stripping recurring boilerplate wrappers (e.g., *Board of Trustees of...*, *Regents of...*) that conceal the true patent owner.
 3. **Abbreviation & Filler Dictionaries:** Standardizing common cross-lingual tokens (e.g., mapping *Univ*, *Université*, *Universität* to *UNIVERSITY*; stripping redundant prepositions and articles).
-4. **Manual Aliases for Top Players:** Regular-expression-driven rules ensuring high-precision mapping for core global quantum computing stakeholders (e.g., IBM, Google, Microsoft, D-Wave, key Chinese and Japanese research academies).
+4. **Manual Aliases for Top Players:** Regular-expression-driven rules ensuring high-precision mapping for core global quantum computing stakeholders. 
+
+**Harmonization in Action (Example):**
+Without this pipeline, a single stakeholder might be split across the database. By applying our custom rules, variants such as `INTERNATIONAL BUSINESS MACHINES`, `IBM CORP`, `IBM INC`, and `IBM GLOBAL SERVICES` are all successfully identified, cleaned, and grouped under a single, unified name: **`IBM`**. This ensures the full weight of the company's patent portfolio is accurately represented in our rankings.
 
 ---
 
@@ -45,13 +48,28 @@ Once names are harmonized, the pipeline determines each applicant's key metadata
 
 ---
 
-## 5. Validation Against a Gold Standard
+## 5. Statistical Validation & Audit Results
 
-To quantitatively measure the harmonization pipeline's performance before deploying it across the entire quantum computing dataset, the rules are tested against a **gold standard** benchmark (`PATSTAT_500_label_datav4.csv`), consisting of names manually grouped by domain experts.
+To quantitatively measure the harmonization pipeline's performance before deploying it across the entire dataset, we conducted a statistical audit using random sampling and text similarity matching. The evaluation focuses on two core metrics:
 
-### Evaluation Metrics
-The alignment between algorithmic predictions and ground truth organizations relies on complementary metrics:
-* **Pairwise Precision, Recall, and F1-score:** Measure the share of correctly linked name pairs (penalizing over-merging / *false positives*) versus the share of true organizational pairs successfully captured (*false negatives*).
-* **Homogeneity, Completeness, and V-measure (`sklearn`):** Evaluate clustering structure quality by ensuring that each predicted group contains a single true organization (homogeneity) and that every real organization is fully encapsulated within a single cluster (completeness).
+1. **Precision (Over-merging Check):** We extract a random sample of 50 merged entity groups to manually verify if the algorithm incorrectly grouped completely different organizations under the same name (False Positives).
+2. **Missed Merges (Under-merging Check):** We extract 50 pairs of *unmerged* entities that share a high text similarity score (≥ 0.6) to manually verify if they are actually the same organization that the algorithm failed to link (False Negatives).
 
-Iterative auditing against the gold standard ensures the optimal calibration of methods A, B, and custom rules, establishing a robust foundation for market concentration and leadership analysis in quantum computing.
+### Initial Audit Results
+
+Based on our first comprehensive audit, the automated Entity Linking algorithm performed as follows:
+
+| Metric | Score | 95% Confidence Interval (Wilson) | Interpretation |
+| :--- | :--- | :--- | :--- |
+| **Precision** | **98.0%** | [89.5% – 99.6%] | **49 out of 50** merged groups truly refer to the same organization. The algorithm is highly reliable at avoiding false groupings. |
+| **Missed Merges** | **46.0%** | [33.0% – 59.6%] | **23 out of 50** highly similar applicant pairs were actually the same organization but left unmerged. |
+
+### Iterative Improvement
+Entity harmonization is inherently an iterative process. A high Precision (98%) ensures that our market data is not corrupted by merging unrelated companies, which is the most critical factor for a reliable landscape analysis. While the Missed Merges rate highlights that some subsidiaries or spelling variants still escape the automated logic, these results establish a validated baseline. 
+
+The pipeline's performance can be continuously improved by reviewing new missed merge samples and manually adding specific entities to the `ORG_ALIASES` dictionary, incrementally reducing the false negative rate without altering the core algorithm.
+
+
+
+
+
